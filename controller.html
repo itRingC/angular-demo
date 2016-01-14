@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="angular.js"></script>
+	<script type="text/javascript">
+	var app=angular.module('app',[]);
+
+	app.controller('test',function($scope,$http){
+		$scope.alert=function(arg){
+			alert(arg);
+		};
+	});
+	</script>
+</head>
+<body ng-controller="test">
+	<input type="text" ng-model="a">
+	<input type="button" value="按钮" ng-click="alert(a);">
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="angular.js"></script>
+	<script type="text/javascript">
+
+	var app=angular.module('app',[]);
+	
+	app.controller('myCtrl',function($scope){
+		$scope.$on('ctrl1-data',function(event,data){ //接收数据 $on
+		$scope.$broadcast('new-data',data); //向下传递数据
+		});
+	});
+	
+	app.controller('myCtrl-1',function($scope){
+		$scope.change=function(name){
+			$scope.$emit('ctrl1-data',name); //向上传递数据
+		};
+	});
+	app.controller('myCtrl-2',function($scope){
+		$scope.$on('new-data',function(event,data){
+			$scope.a=data;
+		});
+	});
+	</script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+<div ng-controller="myCtrl-1">
+<input type="number" ng-model="name" ng-change="change(name)"/>
+</div>
+<div ng-controller="myCtrl-2">
+myCtrl-2-> {{a}}
+</div>
+</div>
+
+</body>
+</html>
